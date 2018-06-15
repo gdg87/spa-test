@@ -92,7 +92,12 @@ class NotesController extends Controller
 
     public function getFavouriteId()
     {
-        return response()->json($this->favourite()->pluck('id'));
+        $favourites = $this->favourite();
+        $ids = [];
+        if ($favourites) {
+            $ids = $favourites->pluck('id');
+        }
+        return response()->json($ids);
     }
 
     /**
