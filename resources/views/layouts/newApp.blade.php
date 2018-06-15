@@ -4,6 +4,7 @@
     <style>
         @import url(https://fonts.googleapis.com/css?family=Raleway:400,300);
     </style>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('build/css/main-style.css') }}">
 </head>
 <body>
