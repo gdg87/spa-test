@@ -12,17 +12,17 @@
       </div>
       <div class="container">
         <div class="list-group" v-if="noteList.length">
-          <a class="list-group-item" href="#" v-for="note in noteList"
+          <a class="list-group-item" href="#" v-for="(note, index) in noteList" v-bind:key="index"
              :class="activeNote ? activeNote.id === note.id ? 'active' : '' : ''"
           >
             <h4 class="list-group-item-heading" @click="toggleActiveClass(note)">
                             <span v-if="beingEditedNote.id !== note.id">
-                                {{ note.title }} &nbsp
+                                {{ note.title }} &nbsp;
                             </span>
               <span v-if="beingEditedNote.id !== note.id">
                                     <div v-if="loggedUser.id === note.user_id" class="glyphicon glyphicon-trash"
                                          title="Delete Note"
-                                         @click="deleteNote(note)"></div> &nbsp
+                                         @click="deleteNote(note)"></div> &nbsp;
                                     <div
                                       :class="[favouriteNoteIdList.indexOf(note.id) < 0 ? heartClass + '-empty' : heartClass]"
                                       :title="[favouriteNoteIdList.indexOf(note.id) < 0 ? 'Favourite' : 'Un Favourite']"
@@ -31,7 +31,7 @@
                                     </div>
                                 </span>
 
-              &nbsp
+              &nbsp;
               <div v-if="beingEditedNote.id !== note.id && note.user_id === loggedUser.id"
                    class="glyphicon glyphicon-pencil" title="Edit Note"
                    @click="editNote(note)"></div>
@@ -39,7 +39,7 @@
               <div v-if="isBeingEdited && activeNote.id === note.id">
                 <input type="text" class="inputText" v-model="beingEditedNote.title">
                 <div class="glyphicon glyphicon-ok" title="Save" @click="update(note.id)"></div>
-                &nbsp
+                &nbsp;
               </div>
             </h4>
           </a>
