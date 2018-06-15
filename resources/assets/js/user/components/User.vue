@@ -15,13 +15,13 @@
             <div class="container">
                 <div class="list-group">
                     <div v-if="userModule.userNotes.length && selectedUser">
-                    <a class="list-group-item" href="#" v-for="note in userModule.userNotes"
-                       :class="(activeNote && activeNote.id === note.id) ? 'active' : ''"
+                    <a class="list-group-item" href="#" v-for="(note, index) in userModule.userNotes"
+                       :class="(activeNote && activeNote.id === note.id) ? 'active' : ''" v-bind:key="index"
                     >
                         <h4 class="list-group-item-heading" @click="toggleActiveClass(note)">
-                            {{ note.title }} &nbsp
+                            {{ note.title }} &nbsp;
                             <div
-                                    :class="[favouriteNoteIdList.indexOf(note.id) < 0 ? 'glyphicon glyphicon-heart' + '-empty' : 'glyphicon glyphicon-heart']"
+                                    :class="[favouriteNoteIdList.indexOf(note.id) < 0 ? 'fa fa-heart' + '-o' : 'fa fa-heart']"
                                     :title="[favouriteNoteIdList.indexOf(note.id) < 0 ? 'Favourite' : 'Un Favourite']"
                                     @click="toggleFavourite(note, favouriteNoteIdList.indexOf(note.id) > -1)"
                             >
@@ -52,7 +52,6 @@
     import vSelect from 'vue-select';
     import axios from 'axios';
     import { noteFavouritedSuccessfully, noteUnFavouritedSuccessfully } from '../../message';
-
     export default {
       name: 'user',
       data() {
@@ -71,7 +70,6 @@
           });
         this.getFavouriteId();
       },
-
       methods: {
         ...mapActions([
           'get',
